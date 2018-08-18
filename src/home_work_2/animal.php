@@ -1,5 +1,5 @@
 <?php
-// Многомерный простой массив:
+// Задание 1 ----------------------------------------------
 $arr[0][0]="Asia"; 
 $arr[0][1]="Africa";
 $arr[0][2]="Australia";
@@ -114,4 +114,32 @@ for ($g=0; $g<=7; $g++) {
 echo $arr[7][$g]."<br>";
 }
 
+echo '<br>';
+// Задание 2 ----------------------------------------------
+
+$animals = array(
+    'Asia' => array ('Malayan Tapir', 'Indian Rhinoceros', 'Slow Loris', 'Asian Elephant', 'Giant Panda', 'Indian Cobra', 'Lesser Bird of Paradise', 'Japanese Macaque','Bactrian Camel', 'Bengal Tiger'),
+    'Africa' => array ('African buffalo', 'African wild dog', 'Banded mongoose', 'Lammergeier', 'Blue wildebeest', 'Bongo', 'Cheetah', 'Cape gannet', 'Chimpanzee', 'Ethiopian wolf'),
+    'Australia' => array ('Kangaroo', 'Echidna', 'Forest Kingfisher', 'Goulds Goanna', 'Dolphins', 'Bandicoot', 'Bilby', 'Platypus', 'Wombat', 'Macrotis'),
+    'South America' => array ('Giant Galapagos Tortoise', 'Anaconda', 'Capybara', 'Southern Right Whale', 'Piranha', 'Andean Condor', 'Llama', 'Caiman', 'Tapir', 'Coatimundi'),
+    'North America' => array ('Arizona Bark Scorpion', 'Jaguar', 'Canadian Goose', 'Eastern Moose', 'North American Beaver', 'American Bison', 'American Alligator', 'Mountain Lion', 'Raccoon', 'Bald Eagle'),
+    'Europe' => array ('Karakurt Spider', 'Wild Boar', 'Alpine Long-Eared Bat', 'Norwegian Lemming', 'Saiga', 'Pine Marten', 'Raccoon Dog', 'Reindeer', 'Camargue Horse', 'Arctic Fox'),
+    'Antarctida' => array ('Emperor penguins', 'Whale species', 'Weddell seals', 'Krill', 'Wandering albatross', 'Snow petrel', 'Antarctic Land Invertebrates', 'Antarctic skua', 'Blue eyed shag', 'Giant petrel')
+    );
+         
+    // $arrayFinal = array(); 
+    // foreach($animals as $areaName => $animalArray) {
+    //     foreach ($animalArray as $animalName) {
+    //         if (strpos($animalName, ' ') !== false) { 
+    //             array_push($arrayFinal, $animalName);
+    //         }
+    //     }
+    // }
+    // print_r($arrayFinal); 
+
+    $result = [];
+    foreach ($animals as $continent) {
+        $result = array_merge($result, array_filter($continent, function ($item){ return count(explode(' ', $item)) === 2; }) );
+    }
+    print_r($result);
 ?>
