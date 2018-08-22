@@ -1,19 +1,14 @@
 <?
-
-$url = "http://api.openweathermap.org/data/2.5/weather?APPID=ad0cbfc4817e1f6adf5eb92e02662145&q=Bishkek";
-
-$data = @file_get_contents($url);
+$url = "http://api.openweathermap.org/data/2.5/weather?APPID=ad0cbfc4817e1f6adf5eb92e02662145&q=Bishkek&units=metric";
+$data = file_get_contents($url);
 if($data){
-    $json = json_decode($data, false);
-    // print_r ($json->coord);
-    $array = $json;
-    foreach($array as $oneDay){
-        echo "Температура: " . $oneDay->temp . "<br/>"; 
-        echo "Влажность: " . $oneDay->humidity . "<br/>";
-        echo "Давление: " . $oneDay->pressure . "<br/>";
-        echo "Скорость ветра: " . $oneDay->speed . "<br/>";
-                 echo "<hr/>";
+    $dataJson = json_decode($data);
+    $arrayDays = $dataJson->main;
+        echo "Температура: " . $arrayDays->temp . "<br/>"; 
+        echo "Давление: " . $arrayDays->pressure . "<br/>"; 
+        echo "Влажность: " . $arrayDays->humidity . "<br/>"; 
+        echo "<hr/>";
     }
-}else{
+else{
     echo "Сервер не доступен!";
 }
