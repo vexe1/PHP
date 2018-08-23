@@ -1,6 +1,8 @@
 <?
 var_dump($argv);
-$data = implode(" ", $argv);
+
+$output=array_slice($argv, 1);
+$data = implode(" ", $output);
+
 
 print_r($data);
-
