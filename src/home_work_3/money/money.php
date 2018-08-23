@@ -5,4 +5,8 @@ $output=array_slice($argv, 1);
 $data = implode(" ", $output);
 
 
-print_r($data);
+$res = fopen("./list.csv", "a");
+fwrite($res, $data."\r\n");
+
+
+fclose($res);
