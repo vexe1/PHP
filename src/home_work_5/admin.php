@@ -18,8 +18,11 @@
     </form>
 
     <?
-    var_dump ($_POST);
+    $fh = fopen("./data_out.json", 'a');
+    fwrite($fh, json_encode($_POST,JSON_UNESCAPED_UNICODE)."\n");
+    fclose($fh);
     ?>
+    
 </body>
 </html>
 
