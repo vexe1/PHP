@@ -1,9 +1,16 @@
-<?php
-    $rows   = array_map('str_getcsv', file('visa_list.csv'));
-    $header = array_shift($rows);
-    $csv    = array();
-    foreach($rows as $row) {
-        $csv[] = array_combine($header, $row);
+<?
+$text = fopen("visa_list.csv","r");
+$row1 = fgetcsv($text);
+while(!feof($text)) 
+    { 
+        $massiv[]=fgetcsv($text);
     }
-    var_dump ($csv);
-?>
+ 
+for($i=0;$i<count($row1);$i++)
+    {
+        foreach($massiv AS $item)
+            {
+                $new[$row1[$i]][]=$item[$i];
+            }
+    }
+print_r($new);

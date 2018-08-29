@@ -3,7 +3,7 @@ var_dump($argv);
 $date = date("d.m.y");
 $amount = 0;
 $myList = "./list.csv";
-$output=array_slice($argv, 1);
+$output= array_slice($argv, 1);
 $input = implode(" ", $output);
 
 // Запись в файл
