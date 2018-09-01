@@ -2,27 +2,37 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Форма запроса</title>
+    <title>Форма загрузки</title>
 </head>
 <body>
-    <form action="admin.php" method="POST" enctype="multipart/form-data">
-        <div>Имя</div>
-        <div><input type="text" name="name"></div>
-        <div>Фамилия</div>
-        <div><input type="text" name="surname"></div>
-        <div>Возраст</div>
-        <div><input type="text" name="age"></div>
-        <div>Номер телефона</div>
-        <div><input type="text" name="phone"></div>
-        <div><input type="submit" value="Отправить"></div>
-    </form>
+<form method="POST" enctype="multipart/form-data">
+    <div>Тесты</div>
+    <div><input type="file" name="upload"></div>
+    <div><input type="submit" name = 'send' value="Отправить"></div>
+</form>
 
-    <?
-    $fh = fopen("./data_out.json", 'a');
-    fwrite($fh, json_encode($_POST,JSON_UNESCAPED_UNICODE)."\n");
-    fclose($fh);
-    ?>
-    
+<?
+$uploadInfo = $_FILES['upload'];
+
+if (isset($_POST['send'])) {
+    $direct = './';
+    if (is_uploaded_file($_FILES["upload"]["tmp_name"])) {
+        if (move_uploaded_file($_FILES["upload"]["tmp_name"], $direct.$_FILES["upload"]["name"])) {
+            echo 'Файл успешно загружен';?>
+            <ul>
+                <li>Размер файла: <?php echo $uploadInfo['size'] ?>байт</li>                 <li>Имя до загрузки: <?php echo $uploadInfo['name'] ?></li>
+                <li>MIME-тип: <?php echo $uploadInfo['type'] ?></li>
+            </ul>
+            <?
+        } else {
+            die('Фйл не удалось загрузить');
+        }
+    } else {
+        die ('Файл не удалось загрузить');
+    }
+}
+?>
+
 </body>
 </html>
 
