@@ -1,6 +1,7 @@
 <?
 $string = file_get_contents ($_GET['test']);
 $data = json_decode($string, true);
+
 ?>
     <html lang="ru">
     <head>
@@ -12,6 +13,9 @@ $data = json_decode($string, true);
         <?php foreach ($data as $i => $value) { ?>
             <fieldset>
                 <legend><? echo $value ["questionName"] ?></legend>
+                <?php
+
+                ?>
                 <label><input  type="radio"><? echo $value ["answer"][0] ?></label>
                 <label><input  type="radio"><? echo $value ["answer"][1] ?></label>
                 <label><input  type="radio"><? echo $value ["answer"][2] ?></label>
