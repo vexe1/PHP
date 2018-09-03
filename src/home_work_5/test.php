@@ -1,8 +1,9 @@
 <?
+error_reporting(0);
 $string = file_get_contents ($_GET['test']);
 $data = json_decode($string, true);
 ?>
-
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -10,27 +11,24 @@ $data = json_decode($string, true);
 </head>
 <body>
 <form  action="test.php" method="get" name="form">
-    <?php foreach ($data as $i => $value) { ?>
+    <?php foreach ($data as $key=>$value){ ?>
         <fieldset>
-            <legend><? echo $value ["questionName"] ?></legend>
-            <?php
-            foreach ($value as $key => $val) {
-                if (is_array($val))
-                    foreach ($val as $num => $answer) { ?>
-                        <label><input type="radio" value="<?echo $answer?>" name="<?echo $value["questionNumber"]?>" ><? echo $answer ?></label>
-                    <? }} ?>
+            <legend>
+                <?= $value['questionName'];?>
+            </legend>
+            <? foreach ($value['answer'] as $key => $answer){ ?>
+                <label>
+                    <input type="radio" value="<?=$answer?>" name="<?=$value['questionNumber']?>" ><?=$answer?>
+                </label>
+            <?}?>
         </fieldset>
-    <? } ?>
+    <?}?>
     <input type="submit" value="Отправить">
 </form>
-<?
-if ($_GET[$value["questionNumber"]] === $value["rightAnswer"]) {
-    echo "РЕШЕНИЕ ВЕРНО";
-} else {
-    echo "НЕВЕРНО";
-}
-?>
+<? var_dump($_GET)?>
 </body
 </html>
+
+
 
 
