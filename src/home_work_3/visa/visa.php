@@ -14,9 +14,9 @@ for($i=0;$i<count($row1);$i++) {
 }
 if ($result = in_array($country, $new['Перечень стран'])) {
     $countryKey = array_search($country, $new['Перечень стран']);
-    if (array_key_exists($countryKey, $new['Режим въезда с общегражданским паспортом'])){
-        echo($countryKey . " " . $country . " " . $new['Режим въезда с общегражданским паспортом'][$countryKey]); exit;
-
+    if (array_key_exists($countryKey, $new['Режим въезда с общегражданским паспортом'])) {
+        echo($countryKey . " " . $country . " " . $new['Режим въезда с общегражданским паспортом'][$countryKey]);
+    }
     } else {
         echo "Введите правильное название страны";
-    }}
+    }
