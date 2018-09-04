@@ -16,7 +16,7 @@ $data = json_decode($string, true);
             <legend>
                 <?= $value['questionName'];?>
             </legend>
-            <? foreach ($value['answer'] as $key => $answer){ ?>
+            <? foreach ($value['answer'] as $k => $answer){ ?>
                 <label>
                     <input type="radio" value="<?=$answer?>" name="<?=$value['questionNumber']?>" ><?=$answer?>
                 </label>
@@ -25,7 +25,12 @@ $data = json_decode($string, true);
     <?}?>
     <input type="submit" value="Отправить">
 </form>
-<? var_dump($_GET)?>
+<?
+echo '<pre>'.print_r(array_keys($_GET), true).'</pre>';
+foreach($_GET as $key => $val){
+    echo $key .' = '.$val.'<br>';
+}
+?>
 </body
 </html>
 
