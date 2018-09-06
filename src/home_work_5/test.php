@@ -2,6 +2,7 @@
 error_reporting(0);
 $string = file_get_contents ($_GET['test']);
 $data = json_decode($string, true);
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,6 +28,7 @@ $data = json_decode($string, true);
 </form>
 <?
 echo '<pre>'.print_r(array_keys($_GET), true).'</pre>';
+
 foreach($_GET as $key => $val){
     echo $key .' = '.$val.'<br>';
 }
