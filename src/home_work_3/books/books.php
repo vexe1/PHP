@@ -3,10 +3,11 @@ $output=array_slice($argv, 1);
 $string = implode(" ", $output);
 $outputData = urlencode($string);
 if ($outputData){
-$url = "https://www.googleapis.com/books/v1/volumes?q=$outputData";
+$url = "https://www.googleapis.com/books/v1/volumes?q=$outputData&maxResults=20";
 $books = file_get_contents($url);
 if($books) {
     $dataJson = json_decode($books);
+
     $arrayBooks = $dataJson->items;
         foreach($arrayBooks as $oneBook){
             $id = $oneBook->id;
