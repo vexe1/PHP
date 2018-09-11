@@ -1,0 +1,41 @@
+
+.search{
+    display: block;
+    margin-bottom: 20px;
+}
+input{
+    height: 25px;
+}
+.sub_frame{
+    letter-spacing: 1px;
+    border: 1px solid #CECECE;
+    box-sizing: border-box;
+    background: none;
+    color: grey;
+    margin-right: 10px;
+
+}
+.sub_frame:focus {
+    color: grey;
+    border: 1px solid #000000
+}
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+
+}
+tr {
+    border: 1px solid #ccc;
+    height: 25px;
+}
+td, th {
+    border: 1px solid #ccc;
+}
+
+table tr:first-child {
+    background: #eee;
+    font-weight: bolder;
+    text-align: center;
+
+}
