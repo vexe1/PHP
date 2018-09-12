@@ -17,20 +17,30 @@ if (isset($_GET['test'])) {?>
                 <legend>
                     <?= $value['questionName'];?>
                 </legend>
-                <?php foreach ($value['answer'] as $k => $answer){ ?>
+                <?php foreach ($value['variants'] as $k => $variants){ ?>
                     <label>
-                        <input type="radio" value="<?=$answer?>" name="<?=$value['questionNumber']?>" ><?=$answer?>
+                        <input type="radio" value="<?=$variants?>" name="<?=$value['question']?>" ><?=$variants?>
+
                     </label>
                 <?php } ?>
+                <input type="hidden" value="<?=$value['rightAnswer']?>" name="<?=$value['questionNumber']?> ">
             </fieldset>
 
 <?php } ?>
-
         <input type="submit" value="Отправить">
     </form>
-<?php } elseif (isset($_GET['q1'])) {
-                echo $_GET['q1'] . $_GET['q2'];
-}
-?>
+    <?php } elseif (isset($_GET)) {
+                if ($_GET['answer_1'] == $_GET['q1_']){
+                    echo "1. Правильный ответ <br>";
+                } else {
+                    echo "1. Ответ неверный <br>";
+                }
+                if ($_GET['answer_2'] == $_GET['q2_']){
+                    echo "2. Правильный ответ <br>";
+                } else {
+                    echo "2. Ответ неверный <br>";
+                }
+
+    } ?>
 </body>
 </html>
