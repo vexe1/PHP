@@ -1,17 +1,10 @@
 <?php
 $dir = "./";
 if(is_dir($dir)) {
-    echo 'ДИРЕКТОРИЯ СУЩЕСТВУЕТ:<br>';
+    echo $dir.' - директория существует;<br>';
     $files = scandir($dir);
-    for($i=0; $i<count($files); $i++){
-        $format = array_pop(explode(".",$files[$i]));
-        if( $format == 'json'){
-            echo '-файл: <a href="test.php?test='.$files[$i].'">'.$files[$i].'</a>;<br>';
-        }
-    }
-}
+    foreach (glob("*.json") as $filename){
+            echo '-файл: <a href="test.php?test='.$filename.'">'.$filename.'</a>;<br>';
+        }}
+
 else echo $dir.' -такой директории нет;<br>';
-
-
-
-
