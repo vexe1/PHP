@@ -60,9 +60,6 @@ if (isset($_GET['test'])) {?>
         imageJpeg($i);
         imageDestroy($i);
     }
-
-//    else {
-//        header("HTTP/1.0 404 Not Found");
-//    }?>
+?>
 </body>
 </html>
