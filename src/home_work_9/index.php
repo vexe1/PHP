@@ -31,16 +31,15 @@ $result = $sth->fetchAll(PDO::FETCH_ASSOC);
             <td>Жанр</td>
             <td>ISBN</td>
         </tr>
-        <? foreach ($result as $value) { ?>
+        <?php foreach ($result as $value) { ?>
             <tr>
-                <td><? echo $value ["name"] ?></td>
-                <td><? echo $value ["author"] ?></td>
-                <td><? echo $value ["year"] ?></td>
-                <td><? echo $value ["genre"] ?></td>
-                <td><? echo $value ["isbn"] ?> </td>
+                <td><?php echo $value ["name"] ?></td>
+                <td><?php echo $value ["author"] ?></td>
+                <td><?php echo $value ["year"] ?></td>
+                <td><?php echo $value ["genre"] ?></td>
+                <td><?php echo $value ["isbn"] ?> </td>
             </tr>
-        <? } ?>
+        <?php } ?>
     </table>
-
 </body>
 </html>
