@@ -1,48 +1,54 @@
-<?
-session_start();
-if (empty($_SESSION['user'])){
+
+
+<?php
+require_once 'functions.php';
+
+if (!isAuthorized()) {
     http_response_code(403);
     die('Доступ запрещен');
-}
-
-$uploadInfo = $_FILES['upload'];
-if (isset($_POST['send'])) {
-    $direct = './';
-    if (is_uploaded_file($_FILES["upload"]["tmp_name"])) {
-        if (move_uploaded_file($_FILES["upload"]["tmp_name"], $direct.$_FILES["upload"]["name"])) {
-            header('Refresh: 3; url=http://rambler.ru/');
-            echo 'Файл успешно загружен'; ?>
-            <ul>
-                <li>Размер файла: <?php echo $uploadInfo['size'] ?>байт</li>
-                <li>Имя до загрузки: <?php echo $uploadInfo['name'] ?></li>
-                <li>MIME-тип: <?php echo $uploadInfo['type'] ?></li>
-            </ul>
-          <?
-        } else {
-            die('Фйл не удалось загрузить');
-        }
-    } else {
-        die ('Файл не удалось загрузить');
-    }
-}
-
-
+} echo 'Привет' . " " . getAthorizedUser()['username'];
 ?>
 
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Форма загрузки</title>
+    <meta charset="utf-8">
+    <title>Простая форма загрузки файла</title>
 </head>
 <body>
-<form method="POST" enctype="multipart/form-data">
-    <div>Тесты</div>
-    <div><input type="file" name="upload"></div>
-    <div><input type="submit" name = 'send' value="Отправить"></div>
+<?php if (!isset($_FILES['upload']['tmp_name'])) : ?>
+    <!-- Данная форма будет показана, если не было загрузок -->
+    <form method="POST" enctype="multipart/form-data">
+        <input name="upload" type="file">
+        <br><br>
+        <input type="submit" value="Отправить">
+    </form>
+
+<?php else: ?>
+<?php
+//header('Location: list.php');
+$uploadInfo = $_FILES['upload'];
+    if (!move_uploaded_file($uploadInfo['tmp_name'], './'.$_FILES["upload"]["name"])) {
+        echo 'Не удалось осуществить сохранение файла';
+    }
+    ?>
+    <ul>
+        <li>Размер файла: <?php echo $uploadInfo['size'] ?>байт</li>
+        <li>Имя до загрузки: <?php echo $uploadInfo['name'] ?></li>
+        <li>MIME-тип: <?php echo $uploadInfo['type'] ?></li>
+    </ul>
+<?php endif; ?>
+<form method="post">
+    <?php
+$dir = "./";
+if(is_dir($dir)) {
+    echo $dir.' - СПИСОК ТЕСТОВ;<br>';
+    $files = scandir($dir);
+    foreach (glob("*.json") as $filename){
+        echo '-файл: <a href="test.php?test='.$filename.'">'.$filename.'</a>;<br>';
+    }}?>
+
+
 </form>
-
-
 </body>
 </html>
-

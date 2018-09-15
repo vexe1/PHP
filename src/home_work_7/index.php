@@ -1,38 +1,36 @@
 <?php
-session_start();
-define('USER_ADMIN', 'admin');
-define('USER_PASS', 'pass');
+    require_once 'functions.php';
+
+
     if (!empty($_POST)) {
-        if ($_POST['name'] == USER_ADMIN && $_POST['password'] == USER_PASS){
-            $_SESSION['user'] = $_POST['name'];
-            header('Location: admin.php');
+        if (login($_POST['login'], $_POST['password'])) {
+            header('Location: list.php');
             die;
-        } else {
-            $errors[] = 'Неверный логин или пароль';
+        } elseif (loginGuest()) {
+            header('Location: list.php');
+            die;
         }
     }
 ?>
+
 <!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Авторизация</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<form id="form" name="form" action="#" method="post">
-    <div id="block">
-        <label id="user" for="name">p</label>
-        <input type="text" name="name" id="name" placeholder="Логин" required/>
-        <label id="pass" for="password">k</label>
-        <input type="password" name="password" id="password" placeholder="Пароль" required />
-        <input type="submit" id="submit" name="submit" value="a"/>
+    <div class="container">
+        <form method="post" class="form-signin">
+            <h2>REGISTRATION</h2>
+            <input type="text" name="login" placeholder="Login" class="form-control">
+            <input type="text" name="password" placeholder="Password" class="form-control">
+            <h3>Войти как гость</h3>
+            <input type="text" name="guest" placeholder="Guest" class="form-control">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        </form>
     </div>
-</form>
-<div id="option">
-    <p>Авторизация</p>
-    <a href="#">Забыли пароль?</a>
-</div>
 </body>
 </html>
