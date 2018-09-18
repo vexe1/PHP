@@ -1,12 +1,14 @@
 <?php
-require_once 'connetct.php';
+require_once 'functions.php';
 
 if(isset($_POST['login'])) {
-    $sql = "select * from user where login = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$_POST['login']]);
-    $found = $stmt->fetch();
-}
+    $stmt = $pdo->prepare("SELECT id FROM user WHERE login = ?");
+    $stmt->bindParam(1, $login);
+    $login = $_POST['login'];
+    $stmt->execute();
+    $found = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
     if ($found) {
         echo "login занят!";
     } else {
@@ -19,6 +21,7 @@ if(isset($_POST['login'])) {
         $stmt->execute();
         exit();
     }
+}
 ?>
 
 <!doctype html>
