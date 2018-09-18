@@ -27,6 +27,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $stmt = $pdo->prepare ("SELECT id, login FROM user");
 $stmt->execute();
 $login_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +44,15 @@ $login_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Список дел на сегодня для пользователя: <?php echo $_SESSION['login']?></h1>
         <div><input class="sub_frame" type="text" name="task" placeholder="Описание задачи"></div>
         <div><input  type="submit" value="Добавить" ></div>
+        </form>
+    <form action="transmitted.php" method="post">
+        <input type="submit" name="transmitted" value="Переданные дела">
+    </form>
+    <form action="task_list.php" method="post">
+        <input type="submit" name="task_list" value="Количество дел">
         <div><a class="nubex" href="logout.php">Выход</a></div>
     </form>
+
 </div>
     <table>
         <tr>
