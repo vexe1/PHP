@@ -3,15 +3,13 @@
    "questionName": "Самая крупная рублёвая купюра имела номинал",
    "variants": ["1000000", "1000000000", "500000", "1500000", "600000"],
    "rightAnswer": "1000000000",
-   "question": "answer_1",
-   "questionNumber": "q1"
+   "question": 1
   },
   {
     "questionName": "Самая глубокая река на Земле",
     "variants": ["Ангара", "Амазонка", "Ганг", "Конго"],
     "rightAnswer": "Конго",
-    "question": "answer_2",
-    "questionNumber": "q2"
+    "question": 2
   }
 
 ]
