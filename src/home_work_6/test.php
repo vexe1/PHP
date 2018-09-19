@@ -1,5 +1,5 @@
 <?php
-if (empty($_GET['test'])) {
+if (empty($_GET)) {
     http_response_code(404);
     echo "Страница не найдена!";
     exit (1);
@@ -17,23 +17,23 @@ if (isset($_GET['test'])) {?>
         $string = file_get_contents($_GET['test']);
         $data = json_decode($string, true);
                 if (!is_array($data)){
-                    header("HTTP/1.0 404 Not Found");
+                    http_response_code(404);
+                    echo "Страница не найдена!";
+                    exit (1);
                 } else {
                 foreach ($data as $key=>$value){?>
-
-            <fieldset>
-                <legend>
+                    <fieldset>
+                        <legend>
                     <?= $value['questionName'];?>
-                </legend>
+                        </legend>
                 <?php foreach ($value['variants'] as $k => $variants){ ?>
                     <label>
                         <input type="radio" value="<?=$variants?>" name="<?=$value['question']?>" ><?=$variants?>
-
                     </label>
                 <?php } ?>
-                <input type="hidden" value="<?=$value['rightAnswer']?>" name="<?=$value['questionNumber']?> ">
-            </fieldset>
-              <?php } ?>
+                        <input type="hidden" value="<?=$value['rightAnswer']?>" name="<?=$value['questionNumber']?> ">
+                    </fieldset>
+                <?php } ?>
         <input type="text" name = "name" placeholder="Введите Ваше имя">
         <input type="submit" value="Отправить">
     </form>

@@ -6,7 +6,6 @@
 </head>
 <body>
 <?php if (!isset($_FILES['upload']['tmp_name'])) : ?>
-    <!-- Данная форма будет показана, если не было загрузок -->
     <form method="POST" enctype="multipart/form-data">
         <input name="upload" type="file">
         <br><br>
@@ -15,12 +14,12 @@
 
 <?php else: ?>
 <?php
-header('Location: list.php');
 $uploadInfo = $_FILES['upload'];
     if (!move_uploaded_file($uploadInfo['tmp_name'], './'.$_FILES["upload"]["name"])) {
         echo 'Не удалось осуществить сохранение файла';
-    }
-    ?>
+    } else {
+        header('Location: list.php');
+    } ?>
     <ul>
         <li>Размер файла: <?php echo $uploadInfo['size'] ?>байт</li>
         <li>Имя до загрузки: <?php echo $uploadInfo['name'] ?></li>
