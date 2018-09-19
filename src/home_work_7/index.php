@@ -24,7 +24,7 @@
 <body>
     <div class="container">
         <form method="post" class="form-signin">
-            <h2>REGISTRATION</h2>
+            <h2>АВТОРИЗАЦИЯ</h2>
             <input type="text" name="login" placeholder="Login" class="form-control">
             <input type="text" name="password" placeholder="Password" class="form-control">
             <h3>Войти как гость</h3>

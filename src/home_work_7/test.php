@@ -12,7 +12,7 @@ if (isset($_GET['test'])) {?>
 <form  action="test.php" method="get" name="form">
     <?php
     getTests();
-        foreach (getTests() as $key=>$value){?>
+    foreach (getTests() as $key=>$value){?>
         <fieldset>
             <legend>
                 <?= $value['questionName'];?>
@@ -20,13 +20,11 @@ if (isset($_GET['test'])) {?>
             <?php foreach ($value['variants'] as $k => $variants){ ?>
                 <label>
                     <input type="radio" value="<?=$variants?>" name="<?=$value['question']?>" ><?=$variants?>
-
                 </label>
             <?php } ?>
             <input type="hidden" value="<?=$value['rightAnswer']?>" name="<?=$value['questionNumber']?> ">
         </fieldset>
     <?php } ?>
-<!--    <input type="text" name = "name" placeholder="Введите Ваше имя">-->
     <input type="submit" value="Отправить">
 </form>
 <?php } elseif (isset($_GET)) {

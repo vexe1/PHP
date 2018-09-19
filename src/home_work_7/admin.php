@@ -1,5 +1,3 @@
-
-
 <?php
 require_once 'functions.php';
 
@@ -17,7 +15,6 @@ if (!isAuthorized()) {
 </head>
 <body>
 <?php if (!isset($_FILES['upload']['tmp_name'])) : ?>
-    <!-- Данная форма будет показана, если не было загрузок -->
     <form method="POST" enctype="multipart/form-data">
         <input name="upload" type="file">
         <br><br>
@@ -26,10 +23,11 @@ if (!isAuthorized()) {
 
 <?php else: ?>
 <?php
-//header('Location: list.php');
 $uploadInfo = $_FILES['upload'];
     if (!move_uploaded_file($uploadInfo['tmp_name'], './'.$_FILES["upload"]["name"])) {
         echo 'Не удалось осуществить сохранение файла';
+    } else {
+        header('Location: list.php');
     }
     ?>
     <ul>
@@ -40,15 +38,13 @@ $uploadInfo = $_FILES['upload'];
 <?php endif; ?>
 <form method="post">
     <?php
-$dir = "./";
-if(is_dir($dir)) {
-    echo $dir.' - СПИСОК ТЕСТОВ;<br>';
-    $files = scandir($dir);
-    foreach (glob("*.json") as $filename){
-        echo '-файл: <a href="test.php?test='.$filename.'">'.$filename.'</a>;<br>';
-    }}?>
-
-
+    $dir = "./";
+    if(is_dir($dir)) {
+        echo $dir.' - СПИСОК ТЕСТОВ;<br>';
+        $files = scandir($dir);
+        foreach (glob("*.json") as $filename){
+            echo '-файл: <a href="test.php?test='.$filename.'">'.$filename.'</a>;<br>';
+        }}?>
 </form>
 </body>
 </html>
