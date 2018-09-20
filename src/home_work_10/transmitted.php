@@ -2,7 +2,7 @@
 require_once 'functions.php';
 
 if (isset($_POST['transmitted'])) {
-    $stmt = $pdo->prepare("SELECT user_id, description, assigned_user_id FROM task JOIN user ON user.id=task.assigned_user_id WHERE task.user_id= ? AND task.assigned_user_id != ?");
+    $stmt = $pdo->prepare("SELECT user_id, description, assigned_user_id, login  FROM task JOIN user ON user.id=task.assigned_user_id WHERE task.user_id= ? AND task.assigned_user_id != ?");
     $stmt->bindParam(1, $user_id);
     $stmt->bindParam(2, $id);
     $user_id = (int)$_SESSION['user_id'];
@@ -29,15 +29,13 @@ if (isset($_POST['back'])){
     <input  type="submit" value="Назад" name="back" >
     <table>
         <tr>
-            <td>Создатель</td>
             <td>Описание задачи</td>
             <td>Исполнитель</td>
         </tr>
         <?php foreach ($result as $value) {  ?>
         <tr>
-            <td><?php echo $value ["user_id"] ?></td>
             <td><?php echo $value ["description"] ?></td>
-            <td><?php echo $value ["assigned_user_id"] ?></td>
+            <td><?php echo $value ["login"] ?></td>
         </tr>
         <?php } ?>
     </table>

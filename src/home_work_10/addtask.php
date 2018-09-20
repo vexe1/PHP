@@ -18,7 +18,7 @@ if (isset($_POST['task'])) {
     $description = $_POST['task'];
     $stmt->execute();
 }
-$stmt = $pdo->prepare ("SELECT id, description, date_added, is_done, assigned_user_id FROM task WHERE user_id = ? ORDER by date_added");
+$stmt = $pdo->prepare ("SELECT task_id, description, date_added, is_done, assigned_user_id, login FROM task JOIN user ON user.id=task.assigned_user_id WHERE user_id = ? ORDER by date_added");
 $stmt->bindParam(1, $user_id);
 $user_id = (int)$_SESSION['user_id'];
 $stmt->execute();
@@ -44,7 +44,7 @@ $login_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Список дел на сегодня для пользователя: <?php echo $_SESSION['login']?></h1>
         <div><input class="sub_frame" type="text" name="task" placeholder="Описание задачи"></div>
         <div><input  type="submit" value="Добавить" ></div>
-        </form>
+    </form>
     <form action="transmitted.php" method="post">
         <input type="submit" name="transmitted" value="Переданные дела">
     </form>
@@ -54,44 +54,44 @@ $login_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </form>
 
 </div>
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>Описание задачи</td>
-            <td>Дата добавления</td>
-            <td>Статус</td>
-            <td>Действия</td>
-            <td>Исполнитель</td>
+<table>
+    <tr>
+        <td>№ задачи</td>
+        <td>Описание задачи</td>
+        <td>Дата добавления</td>
+        <td>Статус</td>
+        <td>Действия</td>
+        <td>Исполнитель</td>
 
+    </tr>
+    <?php foreach ($result as $value) {  ?>
+        <tr>
+            <td><?php echo $value ["task_id"] ?></td>
+            <td><?php echo $value ["description"] ?></td>
+            <td><?php echo $value ["date_added"] ?></td>
+            <td><?php if ($value ["is_done"] == 0){
+                    echo "Не выполнено";
+                } else {
+                    echo "Выполнено";
+                } ?></td>
+            <td>
+                <form action="test.php" method="post">
+                    <button type="submit" name="execute" value="<?php echo $value ["task_id"] ?>">Выполнить</button>
+                    <button type="submit" name="delete" value="<?php echo $value ["task_id"] ?>">Удалить</button>
+                    <select name="get">
+                        <option value="" disabled selected>Передать другому пользователю</option>
+                        <?php foreach ($login_list as $item) { ?>
+                            <option value="<?php echo $item["id"]?>"><?php echo $item["login"]?></option>
+                        <?php } ?>
+                    </select>
+                    <input type="hidden" name="task_id" value="<?php echo $value ["task_id"]?>" >
+                    <input type="submit" value="Передать">
+                </form>
+            </td>
+            <td><?php echo $value["login"] ?></td>
         </tr>
-<?php foreach ($result as $value) {  ?>
-          <tr>
-              <td><?php echo $value ["id"] ?></td>
-              <td><?php echo $value ["description"] ?></td>
-              <td><?php echo $value ["date_added"] ?></td>
-              <td><?php if ($value ["is_done"] == 0){
-                  echo "Не выполнено";
-                  } else {
-                  echo "Выполнено";
-                  } ?></td>
-              <td>
-                  <form action="test.php" method="post">
-                      <button type="submit" name="execute" value="<?php echo $value ["id"] ?>">Выполнить</button>
-                      <button type="submit" name="delete" value="<?php echo $value ["id"] ?>">Удалить</button>
-                      <select name="get">
-                          <option value="" disabled selected>Передать другому пользователю</option>
-                          <?php foreach ($login_list as $item) { ?>
-                          <option value="<?php echo $item["id"]?>"><?php echo $item["login"]?></option>
-                          <?php } ?>
-                      </select>
-                      <input type="hidden" name="id_name" value="<?php echo $value ["id"]?>" >
-                      <input type="submit" value="Передать">
-                  </form>
-              </td>
-              <td><?php echo $value["assigned_user_id"] ?></td>
-          </tr>
-        <?php } ?>
-    </table>
+    <?php } ?>
+</table>
 
 </body>
 </html>
