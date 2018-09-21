@@ -1,0 +1,71 @@
+.form-signin{
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+}
+ul li:first-child{
+    margin-top:15px;
+}
+
+ul li{
+    padding: 5px;
+    margin-left: -40px;
+    list-style-type: none;
+
+}
+.search{
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.sub_frame{
+    letter-spacing: 1px;
+    border: 1px solid #CECECE;
+    box-sizing: border-box;
+    background: none;
+    color: grey;
+    margin-right: 10px;
+
+}
+.sub_frame:focus {
+    color: grey;
+    border: 1px solid #000000
+}
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+
+}
+tr {
+    border: 1px solid #ccc;
+    height: 25px;
+}
+td, th {
+    border: 1px solid #ccc;
+}
+
+table tr:first-child {
+    background: #eee;
+    font-weight: bolder;
+    text-align: center;
+
+}
+
+a.nubex {
+    /*margin-left: 300px;*/
+    color: #fff;
+    user-select: none; /* Убираем текстовое выделение */
+    text-decoration: none;	/* Убираем подчеркивание */
+    outline: none; /* Убираем контур вокруг ссылки */
+    background-color: indianred; /* Цвет фона */
+    padding: 3px 21.5px;
+}
+a.nubex:active {
+    background-color: #ee6206; /* Цвет кнопки при нажатии */
+}
+a.nubex:hover {
+    background-color: #f97f2e; /* Цвет кнопки при наведении курсора */
+}
+
