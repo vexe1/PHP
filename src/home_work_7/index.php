@@ -7,6 +7,7 @@
             header('Location: list.php');
             die;
         } elseif (loginGuest()) {
+            $_SESSION['guest'] = $_POST['guest'];
             header('Location: list.php');
             die;
         }

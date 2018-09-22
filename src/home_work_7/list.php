@@ -1,9 +1,9 @@
 <?php
 require_once 'functions.php';
-if (!isAuthorized()) {
+if (empty($_SESSION['user']) && empty($_SESSION['guest'])) {
     http_response_code(403);
     die('Доступ запрещен');
-} else {
+}  else{
     $dir = "./";
     if(is_dir($dir)) {
         echo $dir.' - СПИСОК ТЕСТОВ;<br>';
@@ -23,13 +23,13 @@ if (!isAuthorized()) {
 </head>
 <body>
 <?php
-    if (!empty($_SESSION['user'])) {  ?>
+    if (isset($_SESSION['user'])) {  ?>
         <ul class="btn">
             <li><a class="btn btn-lg btn-primary btn-block" href="admin.php">Добавить тест</a></li>
             <li><a class="btn btn-lg btn-primary btn-block" href="logout.php">Удалить тест</a></li>
             <li><a class="btn btn-lg btn-primary btn-block" href="logout.php">Выход</a></li>
         </ul>
-    <?php } elseif (!empty($_SESSION['guest'])){ ?>
+    <?php } elseif ($_SESSION['guest']){ ?>
         <ul class="btn">
             <li><a class="btn btn-lg btn-primary btn-block" href="logout.php">Выход</a></li>
         </ul>

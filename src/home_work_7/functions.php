@@ -41,7 +41,6 @@ function getUser($login)
     }
     return null;
 }
-
 function isAuthorized ()
 {
     return !empty($_SESSION['user']);
